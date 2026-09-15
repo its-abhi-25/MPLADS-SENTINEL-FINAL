@@ -5,11 +5,7 @@
     },
     "backend": {
       "root": "backend/",
-      "entrypoint": "app.main:app",
-      "includeFiles": [
-        "data/raw/**",
-        "data/processed/**"
-      ]
+      "entrypoint": "app.main:app"
     }
   },
   "rewrites": [
