@@ -3,6 +3,7 @@ Risk History Tracker
 Tracks changes in risk scores over time for dynamic risk assessment.
 """
 import json
+import os
 from pathlib import Path
 from typing import Dict, Any, List, Optional
 from datetime import datetime
@@ -13,7 +14,10 @@ class RiskHistoryTracker:
     
     def __init__(self, storage_path: str = None):
         if storage_path is None:
-            storage_path = str(Path(__file__).parent.parent.parent.parent / "data" / "risk_history.json")
+            if os.environ.get("VERCEL"):
+                storage_path = str(Path("/tmp") / "mplads_data" / "risk_history.json")
+            else:
+                storage_path = str(Path(__file__).parent.parent.parent.parent / "data" / "risk_history.json")
         self.storage_path = Path(storage_path)
         self._history = self._load()
     

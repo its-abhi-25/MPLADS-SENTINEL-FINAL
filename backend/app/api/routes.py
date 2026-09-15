@@ -12,7 +12,10 @@ from pathlib import Path
 
 router = APIRouter()
 
-AUDIT_FILE = Path(__file__).resolve().parent.parent.parent.parent / "data" / "audit_trail.json"
+if os.environ.get("VERCEL"):
+    AUDIT_FILE = Path("/tmp") / "mplads_data" / "audit_trail.json"
+else:
+    AUDIT_FILE = Path(__file__).resolve().parent.parent.parent.parent / "data" / "audit_trail.json"
 
 
 def _load_audit():
